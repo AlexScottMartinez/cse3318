@@ -68,6 +68,8 @@ void bucket_sort(int arr[], int N)
         idx[h] = floor(((arr[h]-1)/(max-min+1))*N);
     for (k=0; k<N; k++)
         printf("arr[%d]=    %d, idx = %d\n", k, arr[k], idx[k]);
+        
+    free(idx);
     //print_array(arr, N);    
 }
 
@@ -90,18 +92,21 @@ void run1(){
 		printf("File could not be opened.\n");
 		return;
 	}
+	else
+	{
 
-    fscanf(fp, "%d", &mx_size);
-	for (i=0; i<mx_size; i++)
-    {
-        fscanf(fp, "%d", &arr[i]);
-	}
+        fscanf(fp, "%d", &mx_size);
+	    for (i=0; i<mx_size; i++)
+        {
+            fscanf(fp, "%d", &arr[i]);
+	    }
 	
-	fclose(fp);
-	print_array(arr, mx_size);
-	bucket_sort(arr, mx_size);
-	return;
-  
+	    fclose(fp);
+	    print_array(arr, mx_size);
+	    bucket_sort(arr, mx_size);
+	    free(arr);
+	    return;
+    }
 }
 
 int main()
