@@ -24,7 +24,7 @@ run without Valgrind:
 void print_array(int arr[], int N);
 void run1();
 void bucket_sort(int arr[], int N);
-//nodePT insert_sorted(nodePT L, nodePT newP);
+nodePT insert_sorted(nodePT L, nodePT newP);
 
 /* // recommended helper functions:
 // function to insert a new node in a sorted list.
@@ -37,7 +37,8 @@ void print_array(int arr[], int N)
 {
 	int j;
 	printf("\n array: ");
-	for(j=0; j<N; j++){
+	for(j=0; j<N; j++)
+	{
 		printf("%5d,", arr[j]);
 	}
 	printf("\n");
@@ -45,18 +46,28 @@ void print_array(int arr[], int N)
 
 void bucket_sort(int arr[], int N)
 {
-    int i, j;
-    int count[N];
-    for (i=0; i<N; i++)
-        count[i] = 0;
-        
-    for (i=0; i<N;i++)
-        (count[arr[i]])++;
-        
-    for (i=0, j=0; i<N; i++)
-        for (; count[i]>0; (count[i])--)
-            arr[j++] = i;
-
+    int k, j, h, min, max;
+    int idx[N];
+    // Finding the Maximum and Minimum of the array
+    max = arr[0];
+    min = arr[0];
+    for (j=1; j<N; j++)
+    {
+        if (arr[j] > max)
+        {
+            max = arr[j];
+        }
+        if (arr[j] < min)
+        {
+            min = arr[j];
+        }
+    }
+    printf("\nBucketsort: min = %d, max = %d, N = %d buckets\n", min, max, N);
+    // Finding the indexes
+    for (h=0; h<N; h++)
+        idx[h] = floor(((arr[h]-1)/(max-min+1))*N);
+    for (k=0; k<N; k++)
+        printf("arr[%d]=    %d, idx = %d\n", k, arr[k], idx[k]);
     //print_array(arr, N);    
 }
 
@@ -74,18 +85,20 @@ void run1(){
 	printf("Enter the filename: ");
 	scanf("%s", fname);
 	fp =fopen(fname, "r");
-	if (fp == NULL){
+	if (fp == NULL)
+	{
 		printf("File could not be opened.\n");
 		return 1;
 	}
 	fscanf(fp, "%d", &mx_size);
 	for (i=0; i<mx_size; i++)
+	{
 	    fscanf(fp, "%d", &arr[i]);
-	    
+	}    
 	    
 	fclose(fp);
 	print_array(arr, mx_size);
-	//bucket_sort(arr, mx_size);
+	bucket_sort(arr, mx_size);
 
 
 
@@ -98,7 +111,8 @@ int main()
 	printf("The array is sorted using bucket sort.\n");
 	printf("This will be repeated as long as the user wants.\n");
 	int option;
-	do {
+	do 
+	{
 		run1();
 		printf("\nDo you want to repeat? Enter 1 to repeat, or 0 to stop) ");
 		scanf("%d",&option);
