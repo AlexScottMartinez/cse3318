@@ -47,7 +47,7 @@ void print_array(int arr[], int N)
 void bucket_sort(int arr[], int N)
 {
     int k, j, h, min, max;
-    int idx[N];
+    int* idx = malloc(N * sizeof(int));
     // Finding the Maximum and Minimum of the array
     max = arr[0];
     min = arr[0];
@@ -79,7 +79,7 @@ void run1(){
   // Write some helper functions to separate the work.	
     char fname[100];
 	int mx_size, i;
-	int arr[mx_size];
+	int* arr = malloc(mx_size * sizeof(int));
 	FILE *fp;
 
 	printf("Enter the filename: ");
@@ -88,21 +88,20 @@ void run1(){
 	if (fp == NULL)
 	{
 		printf("File could not be opened.\n");
-		return 1;
+		return;
 	}
-	fscanf(fp, "%d", &mx_size);
+
+    fscanf(fp, "%d", &mx_size);
 	for (i=0; i<mx_size; i++)
-	{
-	    fscanf(fp, "%d", &arr[i]);
-	}    
-	    
+    {
+        fscanf(fp, "%d", &arr[i]);
+	}
+	
 	fclose(fp);
 	print_array(arr, mx_size);
 	bucket_sort(arr, mx_size);
-
-
-
-	return 1;
+	return;
+  
 }
 
 int main()
