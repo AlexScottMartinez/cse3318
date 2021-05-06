@@ -311,7 +311,7 @@ int main()
         return -1;
     }
     
-    printf("Number of vertices in built in graph: N = %d\n", num_nodes);
+    printf("Number of vertices in built in graph: N = %d\n", num_nodes - 1);
     printf("Vertex - coursename correspondence\n");
     for(int i = 0; i<num_nodes - 1; i++)
     {
