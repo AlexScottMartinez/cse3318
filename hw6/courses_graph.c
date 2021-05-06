@@ -1,3 +1,5 @@
+// My special.txt is a special case because every line only has 1 item
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
